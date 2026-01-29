@@ -84,7 +84,7 @@ export default function Login() {
               <div className="text-4xl mb-2">🎓</div>
               <CardTitle className="text-2xl">Welcome Back</CardTitle>
               <CardDescription>
-                Sign in to your SchoolGigs account
+                Sign in to your CampusGigs account
               </CardDescription>
             </CardHeader>
 
