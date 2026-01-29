@@ -36,7 +36,7 @@ export default function Index() {
             </motion.div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">Student Talent,</span>
+              <span className="gradient-text">Student Skills,</span>
               <br />
               Real-World Results
             </h1>
