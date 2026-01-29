@@ -26,7 +26,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl">🎓</span>
-            <span className="font-bold text-xl gradient-text">SchoolGigs</span>
+            <span className="font-bold text-xl gradient-text">CampusGigs</span>
           </Link>
 
           {/* Desktop Navigation */}
