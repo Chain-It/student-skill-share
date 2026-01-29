@@ -36,25 +36,26 @@ export default function Index() {
             </motion.div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">Student Skills,</span>
+              <span className="gradient-text">Student Talent,</span>
               <br />
-              Student Prices
+              Real-World Results
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Connect with fellow students for affordable support services. 
-              Graphics, tutoring, presentations, and more — all within your campus community.
+              Discover ambitious students turning their skills into standout work.  
+              From design and tutoring to tech and presentations — get high-quality help
+              from peers who actually get it.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="text-lg px-8">
                 <Link to="/gigs">
-                  Browse Gigs
+                  Explore Top Gigs
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="text-lg px-8">
-                <Link to="/signup">Start Earning</Link>
+                <Link to="/signup">Turn Skills Into Cash</Link>
               </Button>
             </div>
           </motion.div>
@@ -71,10 +72,26 @@ export default function Index() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
-              { icon: Users, title: 'Campus Community', desc: 'Connect with fellow students you know and trust' },
-              { icon: Zap, title: 'Quick Delivery', desc: 'Get support fast with express delivery options' },
-              { icon: Shield, title: 'Secure Payments', desc: 'Safe transactions with Stripe protection' },
-              { icon: Sparkles, title: 'Quality Work', desc: 'Rated services from talented peers' },
+              {
+                icon: Users,
+                title: 'Built by Students',
+                desc: 'Work with driven, verified students who know campus life and expectations',
+              },
+              {
+                icon: Zap,
+                title: 'Fast & Flexible',
+                desc: 'Tight deadline? Many freelancers offer same-day or express delivery',
+              },
+              {
+                icon: Shield,
+                title: 'Payments You Can Trust',
+                desc: 'Secure, hassle-free payments powered by Stripe protection',
+              },
+              {
+                icon: Sparkles,
+                title: 'Pro-Level Quality',
+                desc: 'Highly rated gigs from students sharpening real-world skills',
+              },
             ].map((feature, i) => (
               <motion.div
                 key={feature.title}
@@ -103,10 +120,10 @@ export default function Index() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Popular Categories
+              Skills in Demand
             </h2>
             <p className="text-muted-foreground">
-              Find the help you need across various skill areas
+              Browse popular services students are hiring (and selling) right now
             </p>
           </motion.div>
 
@@ -149,14 +166,14 @@ export default function Index() {
             >
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                  Fresh Gigs 🔥
+                  Trending Gigs 🚀
                 </h2>
                 <p className="text-muted-foreground">
-                  Recently posted by students like you
+                  High-quality services students are booking right now
                 </p>
               </div>
               <Button variant="outline" asChild>
-                <Link to="/gigs">View All</Link>
+                <Link to="/gigs">Browse All Gigs</Link>
               </Button>
             </motion.div>
 
@@ -179,11 +196,11 @@ export default function Index() {
             className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-8 md:p-12 text-center text-primary-foreground"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Share Your Skills?
+              Got Skills? Get Paid.
             </h2>
             <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Create your first gig in minutes and start earning from your talents. 
-              It's free to get started!
+              Launch your first gig in minutes and start earning while building
+              real experience, a portfolio, and your reputation.
             </p>
             <Button
               size="lg"
@@ -192,7 +209,7 @@ export default function Index() {
               className="text-lg px-8"
             >
               <Link to="/signup">
-                Get Started Free
+                Start Selling Today
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
