@@ -75,7 +75,7 @@ export default function Signup() {
 
     toast({
       title: 'Account created!',
-      description: 'Welcome to SchoolGigs. Start exploring!',
+      description: 'Welcome to CampusGigs. Start exploring!',
     });
     navigate('/dashboard');
   };
@@ -91,7 +91,7 @@ export default function Signup() {
           <Card>
             <CardHeader className="text-center">
               <div className="text-4xl mb-2">🚀</div>
-              <CardTitle className="text-2xl">Join SchoolGigs</CardTitle>
+              <CardTitle className="text-2xl">Join CampusGigs</CardTitle>
               <CardDescription>
                 Create an account to start earning or find help
               </CardDescription>
