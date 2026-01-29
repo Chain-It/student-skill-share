@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, Clock, User, ArrowLeft, ShoppingCart } from 'lucide-react';
+import { Star, Clock, User, ArrowLeft, ShoppingCart, HelpCircle } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -25,6 +25,7 @@ export default function GigDetail() {
   const createOrder = useCreateOrder();
 
   const category = GIG_CATEGORIES.find((c) => c.value === gig?.category);
+  const CategoryIcon = category?.icon || HelpCircle;
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-NG', {
@@ -131,16 +132,17 @@ export default function GigDetail() {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-6xl">
-                  {category?.emoji || '🎯'}
+                <div className="w-full h-full flex items-center justify-center">
+                  <CategoryIcon className="w-16 h-16 text-muted-foreground" />
                 </div>
               )}
             </div>
 
             {/* Title & Category */}
             <div>
-              <Badge className="mb-3">
-                {category?.emoji} {category?.label}
+              <Badge className="mb-3 flex items-center gap-1 w-fit">
+                <CategoryIcon className="w-3 h-3" />
+                {category?.label}
               </Badge>
               <h1 className="text-3xl font-bold">{gig.title}</h1>
             </div>

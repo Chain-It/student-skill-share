@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, Clock, User } from 'lucide-react';
+import { Star, Clock, User, HelpCircle } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { GIG_CATEGORIES } from '@/lib/constants';
@@ -13,6 +13,7 @@ interface GigCardProps {
 
 export function GigCard({ gig, index = 0 }: GigCardProps) {
   const category = GIG_CATEGORIES.find((c) => c.value === gig.category);
+  const CategoryIcon = category?.icon || HelpCircle;
   
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-NG', {
@@ -39,12 +40,13 @@ export function GigCard({ gig, index = 0 }: GigCardProps) {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-4xl">
-                {category?.emoji || '🎯'}
+              <div className="w-full h-full flex items-center justify-center">
+                <CategoryIcon className="w-12 h-12 text-muted-foreground" />
               </div>
             )}
-            <Badge className="absolute top-3 left-3" variant="secondary">
-              {category?.emoji} {category?.label}
+            <Badge className="absolute top-3 left-3 flex items-center gap-1" variant="secondary">
+              <CategoryIcon className="w-3 h-3" />
+              {category?.label}
             </Badge>
           </div>
 

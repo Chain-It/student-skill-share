@@ -111,25 +111,28 @@ export default function Index() {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {GIG_CATEGORIES.slice(0, 8).map((cat, i) => (
-              <motion.div
-                key={cat.value}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <Link
-                  to={`/gigs?category=${cat.value}`}
-                  className="block p-6 bg-card border border-border rounded-xl text-center hover-lift group"
+            {GIG_CATEGORIES.slice(0, 8).map((cat, i) => {
+              const Icon = cat.icon;
+              return (
+                <motion.div
+                  key={cat.value}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  <span className="text-4xl mb-3 block group-hover:scale-110 transition-transform">
-                    {cat.emoji}
-                  </span>
-                  <span className="font-medium">{cat.label}</span>
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    to={`/gigs?category=${cat.value}`}
+                    className="block p-6 bg-card border border-border rounded-xl text-center hover-lift group"
+                  >
+                    <div className="mb-3 flex justify-center">
+                      <Icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                    </div>
+                    <span className="font-medium">{cat.label}</span>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
