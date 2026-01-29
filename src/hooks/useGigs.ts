@@ -2,7 +2,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { toast } from '@/hooks/use-toast';
-import type { GigCategory } from '@/lib/constants';
+import type { Database } from '@/integrations/supabase/types';
+
+type GigCategoryDB = Database['public']['Enums']['gig_category'];
 
 export interface Gig {
   id: string;
@@ -11,7 +13,7 @@ export interface Gig {
   description: string;
   price_ngn: number;
   delivery_days: number;
-  category: GigCategory;
+  category: GigCategoryDB;
   image_url: string | null;
   average_rating: number;
   total_reviews: number;
@@ -29,7 +31,7 @@ export interface CreateGigData {
   description: string;
   price_ngn: number;
   delivery_days: number;
-  category: GigCategory;
+  category: GigCategoryDB;
   image_url?: string | null;
 }
 
@@ -50,7 +52,7 @@ export function useGigs(options?: { category?: string; search?: string }) {
         .order('created_at', { ascending: false });
 
       if (options?.category && options.category !== 'all') {
-        query = query.eq('category', options.category as GigCategory);
+        query = query.eq('category', options.category as GigCategoryDB);
       }
 
       if (options?.search) {
@@ -147,10 +149,10 @@ export function useUpdateGig() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, ...data }: Partial<CreateGigData> & { id: string }) => {
+    mutationFn: async ({ id, ...data }: Partial<Omit<CreateGigData, 'category'>> & { id: string; category?: GigCategoryDB }) => {
       const { data: gig, error } = await supabase
         .from('gigs')
-        .update(data)
+        .update(data as any)
         .eq('id', id)
         .select()
         .single();

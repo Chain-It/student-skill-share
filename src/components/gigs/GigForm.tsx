@@ -160,11 +160,17 @@ export function GigForm() {
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {GIG_CATEGORIES.map((cat) => (
-                    <SelectItem key={cat.value} value={cat.value}>
-                      {cat.emoji} {cat.label}
-                    </SelectItem>
-                  ))}
+                  {GIG_CATEGORIES.map((cat) => {
+                    const Icon = cat.icon;
+                    return (
+                      <SelectItem key={cat.value} value={cat.value}>
+                        <span className="flex items-center gap-2">
+                          <Icon className="w-4 h-4" />
+                          {cat.label}
+                        </span>
+                      </SelectItem>
+                    );
+                  })}
                 </SelectContent>
               </Select>
               {errors.category && (
