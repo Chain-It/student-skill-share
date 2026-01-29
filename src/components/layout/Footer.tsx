@@ -7,7 +7,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🎓</span>
-            <span className="font-bold text-lg">SchoolGigs</span>
+            <span className="font-bold text-lg">CampusGigs</span>
           </div>
           
           <p className="text-sm text-muted-foreground text-center">
