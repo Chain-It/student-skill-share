@@ -219,14 +219,29 @@ export type Database = {
     }
     Enums: {
       gig_category:
-        | "graphics"
+        | "graphics_and_design"
+        | "video_and_animation"
+        | "writing_and_translation"
+        | "website_development"
+        | "social_media_marketing"
+        | "programming_and_tech"
+        | "consultations"
+        | "mathematics_and_physics"
+        | "online_tutoring"
+        | "packaging_and_label_design"
+        | "app_design"
+        | "t_shirts_and_merchandise"
+        | "book_design_and_illustration"
+        | "music_and_audio"
+        | "video_ads_and_commercials"
+        | "video_editing"
+        | "ui_ux_design"
+        | "image_editing"
+        | "presentation_design"
+        | "blockchain_smart_contract_development"
         | "study_guides"
         | "proofreading"
-        | "presentations"
-        | "tutoring"
-        | "resume_design"
-        | "brainstorming"
-        | "other"
+        | "cv_resume_design"
       order_status: "pending" | "paid" | "delivered" | "cancelled"
     }
     CompositeTypes: {
@@ -356,14 +371,29 @@ export const Constants = {
   public: {
     Enums: {
       gig_category: [
-        "graphics",
+        "graphics_and_design",
+        "video_and_animation",
+        "writing_and_translation",
+        "website_development",
+        "social_media_marketing",
+        "programming_and_tech",
+        "consultations",
+        "mathematics_and_physics",
+        "online_tutoring",
+        "packaging_and_label_design",
+        "app_design",
+        "t_shirts_and_merchandise",
+        "book_design_and_illustration",
+        "music_and_audio",
+        "video_ads_and_commercials",
+        "video_editing",
+        "ui_ux_design",
+        "image_editing",
+        "presentation_design",
+        "blockchain_smart_contract_development",
         "study_guides",
         "proofreading",
-        "presentations",
-        "tutoring",
-        "resume_design",
-        "brainstorming",
-        "other",
+        "cv_resume_design",
       ],
       order_status: ["pending", "paid", "delivered", "cancelled"],
     },
