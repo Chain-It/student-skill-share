@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { PageLoader } from '@/components/ui/LoadingSpinner';
 
 export default function CreateGig() {
-  const { user, loading } = useAuth();
+  const { user, loading, isEmailVerified } = useAuth();
 
   if (loading) {
     return (
@@ -17,6 +17,11 @@ export default function CreateGig() {
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  // Redirect unverified email users
+  if (!isEmailVerified) {
+    return <Navigate to="/verify-email" replace />;
   }
 
   return (

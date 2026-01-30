@@ -15,7 +15,7 @@ import { useProfile } from '@/hooks/useProfile';
 import { useUpdateProfile, useUploadAvatar } from '@/hooks/useUpdateProfile';
 
 export default function Profile() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, isEmailVerified } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
   const updateProfile = useUpdateProfile();
   const uploadAvatar = useUploadAvatar();
@@ -42,6 +42,11 @@ export default function Profile() {
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  // Redirect unverified email users
+  if (!isEmailVerified) {
+    return <Navigate to="/verify-email" replace />;
   }
 
   const handleAvatarClick = () => {
