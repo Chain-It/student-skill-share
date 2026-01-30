@@ -25,6 +25,9 @@ export default function Profile() {
   const [bio, setBio] = useState('');
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Frontend-only state (NOT saved)
+  const [acknowledgedEthics, setAcknowledgedEthics] = useState(false);
+
   // Initialize form with profile data
   if (profile && !isInitialized) {
     setUsername(profile.username || '');
@@ -44,7 +47,6 @@ export default function Profile() {
     return <Navigate to="/login" replace />;
   }
 
-  // Redirect unverified email users
   if (!isEmailVerified) {
     return <Navigate to="/verify-email" replace />;
   }
@@ -56,16 +58,8 @@ export default function Profile() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-      return;
-    }
-
-    // Validate file size (max 2MB)
-    if (file.size > 2 * 1024 * 1024) {
-      return;
-    }
+    if (!file.type.startsWith('image/')) return;
+    if (file.size > 2 * 1024 * 1024) return;
 
     const avatarUrl = await uploadAvatar.mutateAsync(file);
     await updateProfile.mutateAsync({ avatar_url: avatarUrl });
@@ -73,7 +67,6 @@ export default function Profile() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!username.trim()) return;
 
     await updateProfile.mutateAsync({
@@ -98,6 +91,7 @@ export default function Profile() {
                 Update your profile information and avatar
               </CardDescription>
             </CardHeader>
+
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Avatar Section */}
@@ -175,6 +169,38 @@ export default function Profile() {
                     Email cannot be changed
                   </p>
                 </div>
+
+                {/* ================= FRONTEND-ONLY ADDITIONS ================= */}
+
+                {/* Ethical Guidelines (no backend) */}
+                <div className="rounded-lg border border-border bg-muted/40 p-4 text-sm">
+                  <p className="font-medium mb-1">Ethical Guidelines</p>
+                  <p className="text-muted-foreground">
+                    CampusGigs supports ethical services only. Freelancers should provide
+                    tutoring, feedback, design, and skill-based assistance — not complete
+                    graded academic work on behalf of others.
+                  </p>
+
+                  <label className="flex items-start gap-2 mt-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={acknowledgedEthics}
+                      onChange={(e) => setAcknowledgedEthics(e.target.checked)}
+                      className="mt-1"
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      I understand and agree to follow these guidelines
+                    </span>
+                  </label>
+                </div>
+
+                {/* Profile visibility hint (UI only) */}
+                <div className="text-xs text-muted-foreground text-center">
+                  Your profile will be visible to other students once saved.
+                  This helps clients discover and contact you.
+                </div>
+
+                {/* ================= END FRONTEND-ONLY ================= */}
 
                 {/* Submit Button */}
                 <Button
