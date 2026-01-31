@@ -130,28 +130,67 @@ export type Database = {
       }
       profiles: {
         Row: {
+          availability_hours: string | null
           avatar_url: string | null
           bio: string | null
+          certifications: Json | null
           created_at: string
+          education_institution: string | null
+          education_program: string | null
+          education_year: number | null
           id: string
+          is_identity_verified: boolean | null
+          location: string | null
+          portfolio_items: Json | null
+          preferred_communication: string[] | null
+          professional_title: string | null
+          response_time: string | null
+          skills: string[] | null
+          tools: string[] | null
           total_earnings: number | null
           updated_at: string
           username: string
         }
         Insert: {
+          availability_hours?: string | null
           avatar_url?: string | null
           bio?: string | null
+          certifications?: Json | null
           created_at?: string
+          education_institution?: string | null
+          education_program?: string | null
+          education_year?: number | null
           id: string
+          is_identity_verified?: boolean | null
+          location?: string | null
+          portfolio_items?: Json | null
+          preferred_communication?: string[] | null
+          professional_title?: string | null
+          response_time?: string | null
+          skills?: string[] | null
+          tools?: string[] | null
           total_earnings?: number | null
           updated_at?: string
           username: string
         }
         Update: {
+          availability_hours?: string | null
           avatar_url?: string | null
           bio?: string | null
+          certifications?: Json | null
           created_at?: string
+          education_institution?: string | null
+          education_program?: string | null
+          education_year?: number | null
           id?: string
+          is_identity_verified?: boolean | null
+          location?: string | null
+          portfolio_items?: Json | null
+          preferred_communication?: string[] | null
+          professional_title?: string | null
+          response_time?: string | null
+          skills?: string[] | null
+          tools?: string[] | null
           total_earnings?: number | null
           updated_at?: string
           username?: string

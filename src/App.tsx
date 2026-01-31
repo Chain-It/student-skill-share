@@ -12,6 +12,7 @@ import GigDetail from "./pages/GigDetail";
 import CreateGig from "./pages/CreateGig";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import FreelancerProfile from "./pages/FreelancerProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import VerifyEmail from "./pages/VerifyEmail";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/create-gig" element={<CreateGig />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/freelancer/:id" element={<FreelancerProfile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
