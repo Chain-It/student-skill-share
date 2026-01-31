@@ -1,156 +1,293 @@
 
-# Email Verification & Password Reset Implementation Plan
+# Freelancer Profile Redesign - Implementation Plan
 
 ## Overview
 
-This plan adds two security features to CampusGigs:
-1. **Email Verification Requirement** - Users must verify their email before accessing protected pages (Dashboard, Profile, Create Gig)
-2. **Forgot Password Flow** - Users can reset their password via email
+This plan transforms the current basic profile page into a comprehensive, professional freelancer profile similar to Fiverr and Upwork. The new profile will build trust, showcase skills, and help freelancers get discovered by clients.
 
 ---
 
-## Feature 1: Email Verification Requirement
+## What You'll Get
 
-### How It Works
-When users sign up with email/password, they'll receive a verification email. Until they click the link, they'll see an "Email Verification Required" page instead of the Dashboard.
+### Profile Header Section
+- Large profile photo with professional display
+- Display name and professional headline (e.g., "UI/UX Designer | Figma, Web & Mobile")
+- Location and weekly availability indicator
 
-### Changes Required
+### About Me Section
+- Expanded bio area with guidance for writing compelling summaries
+- Character counter for optimal length
 
-**1. Create Email Verification Page**
-- New page: `src/pages/VerifyEmail.tsx`
-- Shows a friendly message explaining that verification is needed
-- Includes a "Resend verification email" button
-- Displays the email address where the verification was sent
+### Skills & Tools
+- Tag-based skill selection (up to 10 skills)
+- Separate section for tools/technologies used
 
-**2. Update Authentication Hook**
-- Add `isEmailVerified` helper to check `user.email_confirmed_at`
-- Add `resendVerificationEmail` function using Supabase's `resend` method
+### Services Offered
+- List of services linked from your active gigs
+- Shows price range and delivery times
 
-**3. Update Protected Routes**
-- Modify Dashboard, Profile, and CreateGig pages to check email verification status
-- Redirect unverified users to the verification page
+### Portfolio Section
+- Upload work samples (images, PDFs)
+- Add titles and descriptions to each piece
+- Link to external work (GitHub, Behance, etc.)
 
-**4. Handle Post-Verification Redirect**
-- When users click the verification link in their email, they land back on the app
-- Detect the `email_verified` event and show a success message
+### Education & Certifications
+- Add your school/program
+- Optional certifications (Google, Coursera, etc.)
+
+### Working Style
+- Response time preference
+- Weekly availability hours
+- Preferred communication methods
+
+### Trust Indicators
+- Email verified badge
+- Identity verification status
+- Member since date
+
+### Reviews & Stats
+- Average rating across all gigs
+- Total completed orders
+- Client testimonials (pulled from your gig reviews)
+
+### Ethical Guidelines
+- Clear acknowledgment of CampusGigs ethical standards
 
 ---
 
-## Feature 2: Forgot Password Flow
+## How It Will Look
 
-### How It Works
-1. User clicks "Forgot password?" on the login page
-2. User enters their email on a dedicated reset page
-3. Backend sends a password reset email with a secure link
-4. User clicks link, lands on a "Set New Password" page
-5. User enters new password and gains access
+The profile will be organized into clear, scannable sections:
 
-### Changes Required
+```text
++--------------------------------------------------+
+|  HEADER                                          |
+|  [Photo]  Display Name                           |
+|           Professional Title                     |
+|           Location | Availability | Member Since |
++--------------------------------------------------+
+|                                                  |
+|  ABOUT ME                                        |
+|  Bio text with value proposition...              |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  SKILLS & TOOLS                                  |
+|  [React] [Figma] [TypeScript] [Tailwind] ...     |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  MY SERVICES (linked from gigs)                  |
+|  - Landing Page Design   |   N15,000   |  3 days |
+|  - UI/UX Consultation    |   N8,000    |  1 day  |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  PORTFOLIO                                       |
+|  [Image 1]  [Image 2]  [Image 3]  [+ Add]        |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  EDUCATION                                       |
+|  Computer Science - University Name - 2024      |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  REVIEWS (from completed orders)                 |
+|  [Star] 4.8 average | 12 reviews                 |
+|  "Great work, fast delivery..." - Client A      |
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|  [Contact Freelancer]  [View All Gigs]           |
+|                                                  |
++--------------------------------------------------+
+```
 
-**1. Create Forgot Password Page**
-- New page: `src/pages/ForgotPassword.tsx`
-- Simple form with email input
-- Uses Supabase's built-in `resetPasswordForEmail` method
-- Shows confirmation message after sending
+---
 
-**2. Create Reset Password Page**
-- New page: `src/pages/ResetPassword.tsx`
-- Captures token from URL
-- Two password fields (new password + confirm)
-- Uses Supabase's `updateUser` to set new password
+## Database Changes Required
 
-**3. Update Login Page**
-- Add "Forgot password?" link below the password field
-- Link navigates to `/forgot-password`
+New columns will be added to the `profiles` table:
 
-**4. Update Authentication Hook**
-- Add `resetPassword(email)` function
-- Add `updatePassword(newPassword)` function
+| Field | Description |
+|-------|-------------|
+| `professional_title` | Keyword-rich headline (80 chars) |
+| `location` | City/Campus/Hostel |
+| `availability_hours` | Weekly hours (e.g., "10-20") |
+| `skills` | Array of skills (up to 10) |
+| `tools` | Array of tools/technologies |
+| `response_time` | Preferred response time |
+| `preferred_communication` | Array of methods |
+| `education_program` | Degree/Program name |
+| `education_institution` | School name |
+| `education_year` | Graduation year |
+| `certifications` | Array of certification objects |
+| `portfolio_items` | Array of portfolio entries |
+| `is_identity_verified` | Boolean for verification status |
 
-**5. Add Routes**
-- `/forgot-password` → ForgotPassword page
-- `/reset-password` → ResetPassword page
-- `/verify-email` → VerifyEmail page
+---
+
+## New Pages & Components
+
+### Pages
+- **`/profile`** - Enhanced edit profile page (redesigned)
+- **`/freelancer/:id`** - Public freelancer profile view (new)
+
+### Components
+- `ProfileHeader` - Photo, name, title, badges
+- `SkillsSection` - Skill tags with add/remove
+- `PortfolioGrid` - Portfolio items with upload
+- `EducationSection` - Education & certifications
+- `WorkingStyleSection` - Availability & communication
+- `FreelancerReviews` - Reviews pulled from orders
+- `TrustBadges` - Verification indicators
+- `FreelancerServices` - Services from active gigs
+
+---
+
+## Storage Changes
+
+A new storage bucket `portfolio` will be created for:
+- Portfolio images
+- PDF work samples
+- Certificate images
+
+---
+
+## Implementation Steps
+
+### Step 1: Database Migration
+Add new columns to the `profiles` table with appropriate defaults
+
+### Step 2: Update Profile Hooks
+Extend `useProfile` and `useUpdateProfile` to handle new fields
+
+### Step 3: Create Profile Components
+Build modular, reusable components for each section
+
+### Step 4: Redesign Edit Profile Page
+Replace current form with sectioned, tabbed interface
+
+### Step 5: Create Public Profile Page
+Build a read-only view for other users to see freelancer profiles
+
+### Step 6: Add Portfolio Upload
+Implement image/PDF upload for portfolio section
+
+### Step 7: Connect Reviews & Gigs
+Pull in ratings and services from existing tables
+
+### Step 8: Add Navigation
+Link to profiles from gig cards and gig detail pages
 
 ---
 
 ## Technical Details
 
-### Files to Create
-| File | Purpose |
-|------|---------|
-| `src/pages/VerifyEmail.tsx` | Email verification required page |
-| `src/pages/ForgotPassword.tsx` | Request password reset form |
-| `src/pages/ResetPassword.tsx` | Set new password form |
+### Database Migration SQL
 
-### Files to Modify
-| File | Changes |
-|------|---------|
-| `src/hooks/useAuth.tsx` | Add `isEmailVerified`, `resendVerificationEmail`, `resetPassword`, `updatePassword` |
-| `src/pages/Dashboard.tsx` | Add email verification check |
-| `src/pages/Profile.tsx` | Add email verification check |
-| `src/pages/CreateGig.tsx` | Add email verification check |
-| `src/pages/Login.tsx` | Add "Forgot password?" link |
-| `src/App.tsx` | Add new routes |
-
-### Authentication Methods (Supabase)
-
-```text
-Password Reset Flow:
-┌─────────────┐    ┌──────────────────┐    ┌────────────────┐
-│ Forgot      │───▶│ resetPassword    │───▶│ Email with     │
-│ Password    │    │ ForEmail()       │    │ magic link     │
-└─────────────┘    └──────────────────┘    └────────────────┘
-                                                   │
-                                                   ▼
-┌─────────────┐    ┌──────────────────┐    ┌────────────────┐
-│ Dashboard   │◀───│ updateUser()     │◀───│ Reset Password │
-│ Access      │    │ {password: new}  │    │ Page           │
-└─────────────┘    └──────────────────┘    └────────────────┘
+```sql
+ALTER TABLE public.profiles
+ADD COLUMN professional_title TEXT,
+ADD COLUMN location TEXT,
+ADD COLUMN availability_hours TEXT,
+ADD COLUMN skills TEXT[] DEFAULT '{}',
+ADD COLUMN tools TEXT[] DEFAULT '{}',
+ADD COLUMN response_time TEXT,
+ADD COLUMN preferred_communication TEXT[] DEFAULT '{}',
+ADD COLUMN education_program TEXT,
+ADD COLUMN education_institution TEXT,
+ADD COLUMN education_year INTEGER,
+ADD COLUMN certifications JSONB DEFAULT '[]',
+ADD COLUMN portfolio_items JSONB DEFAULT '[]',
+ADD COLUMN is_identity_verified BOOLEAN DEFAULT FALSE;
 ```
 
-### Email Verification Check Logic
+### Updated Profile Interface
 
-```text
-User tries to access protected page
-           │
-           ▼
-    Is user logged in?
-     │           │
-    No          Yes
-     │           │
-     ▼           ▼
-  Redirect    Is email verified?
-  to Login     │           │
-              No          Yes
-               │           │
-               ▼           ▼
-          Redirect      Show
-          to Verify     Page
-          Email
+```typescript
+interface Profile {
+  id: string;
+  username: string;
+  avatar_url: string | null;
+  bio: string | null;
+  professional_title: string | null;
+  location: string | null;
+  availability_hours: string | null;
+  skills: string[];
+  tools: string[];
+  response_time: string | null;
+  preferred_communication: string[];
+  education_program: string | null;
+  education_institution: string | null;
+  education_year: number | null;
+  certifications: Certification[];
+  portfolio_items: PortfolioItem[];
+  is_identity_verified: boolean;
+  total_earnings: number;
+  created_at: string;
+  updated_at: string;
+}
+```
+
+### Skills Suggestions List
+Pre-populated suggestions based on gig categories:
+- React, JavaScript, TypeScript, Python
+- Figma, Adobe XD, Photoshop, Illustrator
+- Video Editing, Motion Graphics
+- Academic Writing, Tutoring, Proofreading
+- And more...
+
+### Portfolio Item Structure
+
+```typescript
+interface PortfolioItem {
+  id: string;
+  title: string;
+  description: string;
+  file_url: string;
+  file_type: 'image' | 'pdf' | 'link';
+  external_link?: string;
+  created_at: string;
+}
 ```
 
 ---
 
-## User Experience
+## Files to Create
 
-### Sign Up Flow (After Implementation)
-1. User fills out signup form
-2. Account is created, user sees "Check your email to verify" message
-3. User clicks link in email
-4. User is redirected to Dashboard with success toast
+| File | Purpose |
+|------|---------|
+| `src/pages/FreelancerProfile.tsx` | Public profile view page |
+| `src/components/profile/ProfileHeader.tsx` | Header section component |
+| `src/components/profile/SkillsInput.tsx` | Skills tag input |
+| `src/components/profile/PortfolioSection.tsx` | Portfolio grid |
+| `src/components/profile/EducationSection.tsx` | Education form |
+| `src/components/profile/WorkingStyleSection.tsx` | Availability |
+| `src/components/profile/TrustBadges.tsx` | Verification badges |
+| `src/components/profile/FreelancerReviews.tsx` | Reviews display |
+| `src/hooks/useFreelancerProfile.ts` | Public profile data hook |
+| `src/hooks/usePortfolioUpload.ts` | Portfolio file upload |
+| `src/lib/skills-constants.ts` | Predefined skill suggestions |
 
-### Password Reset Flow
-1. User clicks "Forgot password?" on login page
-2. User enters email, clicks "Send Reset Link"
-3. User receives email with secure link
-4. User clicks link, enters new password
-5. User is logged in and redirected to Dashboard
+## Files to Modify
+
+| File | Changes |
+|------|---------|
+| `src/pages/Profile.tsx` | Complete redesign with sections |
+| `src/hooks/useProfile.ts` | Add new fields to interface |
+| `src/hooks/useUpdateProfile.ts` | Support new fields |
+| `src/pages/GigDetail.tsx` | Link to freelancer profile |
+| `src/components/gigs/GigCard.tsx` | Link to freelancer profile |
+| `src/App.tsx` | Add `/freelancer/:id` route |
 
 ---
 
 ## Notes
 
-- OAuth users (Google/Apple) automatically have verified emails
-- The verification and reset emails use Supabase's built-in email templates
-- No edge function or external email service (like Resend) is needed since we're using Supabase's native auth email features
+- All new profile fields are optional to avoid breaking existing profiles
+- Portfolio uploads use the same pattern as avatar uploads
+- Reviews are read-only and pulled from the existing ratings system
+- The public profile page is viewable by anyone (follows existing RLS for profiles)
+- Skills and tools use a tag-based UI for easy add/remove
