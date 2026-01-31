@@ -52,14 +52,18 @@ export function GigCard({ gig, index = 0 }: GigCardProps) {
 
           <CardContent className="p-4">
             {/* Seller */}
-            <div className="flex items-center gap-2 mb-2">
+            <Link 
+              to={`/freelancer/${gig.user_id}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 mb-2 hover:opacity-80 transition-opacity"
+            >
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                 <User className="w-3 h-3 text-primary" />
               </div>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 {gig.profiles?.username || 'Anonymous'}
               </span>
-            </div>
+            </Link>
 
             {/* Title */}
             <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">

@@ -148,12 +148,17 @@ export default function GigDetail() {
             </div>
 
             {/* Seller Info */}
-            <div className="flex items-center gap-4">
+            <Link 
+              to={`/freelancer/${gig.user_id}`}
+              className="flex items-center gap-4 p-3 -mx-3 rounded-lg hover:bg-accent/50 transition-colors"
+            >
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <User className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="font-medium">{gig.profiles?.username}</p>
+                <p className="font-medium hover:text-primary transition-colors">
+                  {gig.profiles?.username}
+                </p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <RatingStars rating={gig.average_rating} readonly size="sm" />
                   <span>
@@ -163,7 +168,7 @@ export default function GigDetail() {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
 
             <Separator />
 

@@ -2,11 +2,24 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { toast } from 'sonner';
+import type { Certification } from '@/lib/profile-types';
+import type { Json } from '@/integrations/supabase/types';
 
 interface UpdateProfileData {
   username?: string;
-  bio?: string;
+  bio?: string | null;
   avatar_url?: string;
+  professional_title?: string | null;
+  location?: string | null;
+  availability_hours?: string | null;
+  skills?: string[];
+  tools?: string[];
+  response_time?: string | null;
+  preferred_communication?: string[];
+  education_program?: string | null;
+  education_institution?: string | null;
+  education_year?: number | null;
+  certifications?: Certification[];
 }
 
 export function useUpdateProfile() {
@@ -17,18 +30,36 @@ export function useUpdateProfile() {
     mutationFn: async (data: UpdateProfileData) => {
       if (!user) throw new Error('Not authenticated');
 
+      // Prepare update payload, converting arrays for Supabase
+      const updatePayload: Record<string, unknown> = {
+        updated_at: new Date().toISOString(),
+      };
+
+      if (data.username !== undefined) updatePayload.username = data.username;
+      if (data.bio !== undefined) updatePayload.bio = data.bio;
+      if (data.avatar_url !== undefined) updatePayload.avatar_url = data.avatar_url;
+      if (data.professional_title !== undefined) updatePayload.professional_title = data.professional_title;
+      if (data.location !== undefined) updatePayload.location = data.location;
+      if (data.availability_hours !== undefined) updatePayload.availability_hours = data.availability_hours;
+      if (data.skills !== undefined) updatePayload.skills = data.skills;
+      if (data.tools !== undefined) updatePayload.tools = data.tools;
+      if (data.response_time !== undefined) updatePayload.response_time = data.response_time;
+      if (data.preferred_communication !== undefined) updatePayload.preferred_communication = data.preferred_communication;
+      if (data.education_program !== undefined) updatePayload.education_program = data.education_program;
+      if (data.education_institution !== undefined) updatePayload.education_institution = data.education_institution;
+      if (data.education_year !== undefined) updatePayload.education_year = data.education_year;
+      if (data.certifications !== undefined) updatePayload.certifications = data.certifications as unknown as Json;
+
       const { error } = await supabase
         .from('profiles')
-        .update({
-          ...data,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updatePayload)
         .eq('id', user.id);
 
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['freelancer-profile'] });
       toast.success('Profile updated successfully!');
     },
     onError: (error) => {
