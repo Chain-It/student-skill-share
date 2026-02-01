@@ -19,6 +19,7 @@ interface UpdateProfileData {
   education_program?: string | null;
   education_institution?: string | null;
   education_year?: number | null;
+  education_level?: string | null;
   certifications?: Certification[];
 }
 
@@ -48,6 +49,7 @@ export function useUpdateProfile() {
       if (data.education_program !== undefined) updatePayload.education_program = data.education_program;
       if (data.education_institution !== undefined) updatePayload.education_institution = data.education_institution;
       if (data.education_year !== undefined) updatePayload.education_year = data.education_year;
+      if (data.education_level !== undefined) updatePayload.education_level = data.education_level;
       if (data.certifications !== undefined) updatePayload.certifications = data.certifications as unknown as Json;
 
       const { error } = await supabase

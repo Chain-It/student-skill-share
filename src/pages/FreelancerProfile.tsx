@@ -124,6 +124,7 @@ export default function FreelancerProfile() {
                 program={profile.education_program}
                 institution={profile.education_institution}
                 year={profile.education_year}
+                level={profile.education_level}
                 certifications={profile.certifications}
               />
 
