@@ -33,6 +33,7 @@ export interface ExtendedProfile {
   education_program: string | null;
   education_institution: string | null;
   education_year: number | null;
+  education_level: string | null;
   certifications: Certification[];
   portfolio_items: PortfolioItem[];
   is_identity_verified: boolean;

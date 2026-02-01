@@ -86,3 +86,14 @@ export const AVAILABILITY_OPTIONS = [
   '30-40 hrs/week',
   '40+ hrs/week',
 ] as const;
+
+export const STUDENT_LEVEL_OPTIONS = [
+  '100 Level',
+  '200 Level',
+  '300 Level',
+  '400 Level',
+  '500 Level',
+  '600 Level',
+  'Graduate Student',
+  'Alumni',
+] as const;

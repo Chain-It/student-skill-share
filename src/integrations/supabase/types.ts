@@ -136,6 +136,7 @@ export type Database = {
           certifications: Json | null
           created_at: string
           education_institution: string | null
+          education_level: string | null
           education_program: string | null
           education_year: number | null
           id: string
@@ -158,6 +159,7 @@ export type Database = {
           certifications?: Json | null
           created_at?: string
           education_institution?: string | null
+          education_level?: string | null
           education_program?: string | null
           education_year?: number | null
           id: string
@@ -180,6 +182,7 @@ export type Database = {
           certifications?: Json | null
           created_at?: string
           education_institution?: string | null
+          education_level?: string | null
           education_program?: string | null
           education_year?: number | null
           id?: string

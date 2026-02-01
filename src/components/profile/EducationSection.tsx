@@ -7,6 +7,7 @@ interface EducationSectionProps {
   program: string | null;
   institution: string | null;
   year: number | null;
+  level: string | null;
   certifications: Certification[];
 }
 
@@ -14,14 +15,24 @@ export function EducationSection({
   program, 
   institution, 
   year, 
+  level,
   certifications 
 }: EducationSectionProps) {
-  const hasEducation = program || institution || year;
+  const hasEducation = program || institution || year || level;
   const hasCertifications = certifications.length > 0;
 
   if (!hasEducation && !hasCertifications) {
     return null;
   }
+
+  // Display level if available, otherwise fallback to "Class of {year}" for legacy data
+  const getEducationLevel = () => {
+    if (level) return level;
+    if (year && year > 1900 && year < 2100) return `Class of ${year}`;
+    return null;
+  };
+
+  const displayLevel = getEducationLevel();
 
   return (
     <Card>
@@ -42,8 +53,8 @@ export function EducationSection({
               {institution && (
                 <p className="text-sm text-muted-foreground">{institution}</p>
               )}
-              {year && (
-                <p className="text-sm text-muted-foreground">Class of {year}</p>
+              {displayLevel && (
+                <p className="text-sm text-muted-foreground">{displayLevel}</p>
               )}
             </div>
           </div>

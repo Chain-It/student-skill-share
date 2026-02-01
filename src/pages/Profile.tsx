@@ -30,6 +30,7 @@ import {
   RESPONSE_TIME_OPTIONS,
   COMMUNICATION_METHODS,
   AVAILABILITY_OPTIONS,
+  STUDENT_LEVEL_OPTIONS,
 } from '@/lib/skills-constants';
 import type { ExtendedProfile, Certification, PortfolioItem } from '@/lib/profile-types';
 
@@ -58,6 +59,7 @@ export default function Profile() {
   // Education
   const [educationProgram, setEducationProgram] = useState('');
   const [educationInstitution, setEducationInstitution] = useState('');
+  const [educationLevel, setEducationLevel] = useState('');
   const [educationYear, setEducationYear] = useState('');
 
   const [isInitialized, setIsInitialized] = useState(false);
@@ -78,6 +80,7 @@ export default function Profile() {
       setEducationProgram(extendedProfile.education_program || '');
       setEducationInstitution(extendedProfile.education_institution || '');
       setEducationYear(extendedProfile.education_year?.toString() || '');
+      setEducationLevel(extendedProfile.education_level || '');
       setIsInitialized(true);
     }
   }, [profile, isInitialized]);
@@ -129,6 +132,7 @@ export default function Profile() {
       education_program: educationProgram.trim() || null,
       education_institution: educationInstitution.trim() || null,
       education_year: educationYear ? parseInt(educationYear) : null,
+      education_level: educationLevel || null,
     });
   };
 
@@ -316,15 +320,19 @@ export default function Profile() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label>Graduation Year</Label>
-                        <Input
-                          type="number"
-                          value={educationYear}
-                          onChange={(e) => setEducationYear(e.target.value)}
-                          placeholder="e.g., 2024"
-                          min="1990"
-                          max="2030"
-                        />
+                        <Label>Current Level</Label>
+                        <Select value={educationLevel} onValueChange={setEducationLevel}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {STUDENT_LEVEL_OPTIONS.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
                   </TabsContent>
