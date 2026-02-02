@@ -25,9 +25,6 @@ export function Footer() {
             <Link to="/dashboard" className="hover:text-foreground transition-colors">
               Dashboard
             </Link>
-            {/* Optional future links */}
-            {/* <Link to="/about">About</Link> */}
-            {/* <Link to="/faq">FAQ</Link> */}
           </div>
         </div>
 
@@ -38,28 +35,43 @@ export function Footer() {
             <p className="font-medium text-foreground mb-1">Contact</p>
             <p>
               Email:{" "}
-              <span className="hover:text-foreground transition-colors cursor-pointer">
-                your-email@campusgigs.com
-              </span>
+              <a
+                href="mailto:umuhammadahmad15@gmail.com"
+                className="hover:text-foreground transition-colors"
+              >
+                umuhammadahmad15@gmail.com
+              </a>
             </p>
-            {/* Optional */}
-            {/* <p>Support Hours: Mon–Fri, 9am–5pm</p> */}
           </div>
 
           {/* Socials */}
           <div className="text-center md:text-right">
             <p className="font-medium text-foreground mb-1">Follow Us</p>
             <div className="flex justify-center md:justify-end gap-4">
-              <span className="hover:text-foreground transition-colors cursor-pointer">
+              <a
+                href="https://x.com/Omar_ER7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
                 Twitter
-              </span>
-              <span className="hover:text-foreground transition-colors cursor-pointer">
+              </a>
+              <a
+                href="https://www.instagram.com/umuhammadahmad15/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
                 Instagram
-              </span>
-              <span className="hover:text-foreground transition-colors cursor-pointer">
+              </a>
+              <a
+                href="https://www.linkedin.com/in/umar-muhammad-ahmad-94b46828a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
                 LinkedIn
-              </span>
-              {/* Replace spans with <a> when ready */}
+              </a>
             </div>
           </div>
         </div>
