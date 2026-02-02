@@ -1,6 +1,34 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export function Footer() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/maqbazog", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <footer className="bg-muted/50 border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-8">
@@ -30,18 +58,50 @@ export function Footer() {
 
         {/* Contact & Socials */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-muted-foreground">
-          {/* Contact */}
+          {/* Contact Form */}
           <div className="text-center md:text-left">
-            <p className="font-medium text-foreground mb-1">Contact</p>
-            <p>
-              Email:{" "}
-              <a
-                href="mailto:umuhammadahmad15@gmail.com"
-                className="hover:text-foreground transition-colors"
+            <p className="font-medium text-foreground mb-2">Contact Us</p>
+
+            <form onSubmit={handleSubmit} className="space-y-3 max-w-md mx-auto md:mx-0">
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Your name"
+                className="w-full px-3 py-2 border rounded-md bg-background"
+              />
+
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Your email"
+                className="w-full px-3 py-2 border rounded-md bg-background"
+              />
+
+              <textarea
+                name="message"
+                required
+                rows={3}
+                placeholder="Your message"
+                className="w-full px-3 py-2 border rounded-md bg-background"
+              />
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition"
               >
-                umuhammadahmad15@gmail.com
-              </a>
-            </p>
+                {status === "sending" ? "Sending..." : "Send Message"}
+              </button>
+
+              {status === "sent" && (
+                <p className="text-green-500 text-sm">Message sent successfully ✅</p>
+              )}
+              {status === "error" && (
+                <p className="text-red-500 text-sm">Failed to send ❌</p>
+              )}
+            </form>
           </div>
 
           {/* Socials */}
