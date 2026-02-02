@@ -1,6 +1,17 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Users, Zap, Shield } from 'lucide-react';
+import {
+  ArrowRight,
+  Sparkles,
+  Users,
+  Zap,
+  Shield,
+  Trophy,
+  Calendar,
+  DollarSign,
+  MessageSquare,
+  HelpCircle,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Layout } from '@/components/layout/Layout';
 import { GigCard } from '@/components/gigs/GigCard';
@@ -94,128 +105,4 @@ export default function Index() {
               },
             ].map((feature, i) => (
               <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card p-6 rounded-xl border border-border hover-lift"
-              >
-                <feature.icon className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Skills in Demand
-            </h2>
-            <p className="text-muted-foreground">
-              Browse popular services students are hiring (and selling) right now
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {GIG_CATEGORIES.slice(0, 8).map((cat, i) => {
-              const Icon = cat.icon;
-              return (
-                <motion.div
-                  key={cat.value}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <Link
-                    to={`/gigs?category=${cat.value}`}
-                    className="block p-6 bg-card border border-border rounded-xl text-center hover-lift group"
-                  >
-                    <div className="mb-3 flex justify-center">
-                      <Icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
-                    </div>
-                    <span className="font-medium">{cat.label}</span>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Gigs */}
-      {featuredGigs.length > 0 && (
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-between mb-8"
-            >
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                  Trending Gigs 🚀
-                </h2>
-                <p className="text-muted-foreground">
-                  High-quality services students are booking right now
-                </p>
-              </div>
-              <Button variant="outline" asChild>
-                <Link to="/gigs">Browse All Gigs</Link>
-              </Button>
-            </motion.div>
-
-            <div className="card-grid">
-              {featuredGigs.map((gig, i) => (
-                <GigCard key={gig.id} gig={gig} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-8 md:p-12 text-center text-primary-foreground"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Got Skills? Get Paid.
-            </h2>
-            <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Launch your first gig in minutes and start earning while building
-              real experience, a portfolio, and your reputation.
-            </p>
-            <Button
-              size="lg"
-              variant="secondary"
-              asChild
-              className="text-lg px-8"
-            >
-              <Link to="/signup">
-                Start Selling Today
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-    </Layout>
-  );
-}
+                key={feature
