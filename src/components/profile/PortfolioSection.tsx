@@ -106,7 +106,14 @@ export function PortfolioSection({ items, isEditable = false }: PortfolioSection
                   Add Work
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent
+                onInteractOutside={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (target.closest('[data-radix-select-content]')) {
+                    e.preventDefault();
+                  }
+                }}
+              >
                 <DialogHeader>
                   <DialogTitle>Add Portfolio Item</DialogTitle>
                 </DialogHeader>
