@@ -255,7 +255,7 @@ export default function Login() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder="umar@email.com"
                       {...register('email')}
                     />
                     {errors.email && (
