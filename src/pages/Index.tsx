@@ -61,7 +61,7 @@ export default function Index() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="text-lg px-8">
                 <Link to="/gigs">
-                  Explore Top Gigs
+                  Explore Gigs
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
@@ -184,7 +184,7 @@ export default function Index() {
                 </p>
               </div>
               <Button variant="outline" asChild>
-                <Link to="/gigs">Browse All Gigs</Link>
+                <Link to="/gigs">Explore All Gigs</Link>
               </Button>
             </motion.div>
 
@@ -217,10 +217,10 @@ export default function Index() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Users, value: "10,000+", label: "Active Students" },
-              { icon: DollarSign, value: "₦100M+", label: "Earnings Paid Out" },
+              { icon: Users, value: "1,000+", label: "Active Students" },
+              { icon: DollarSign, value: "₦10M+", label: "Earnings Paid Out" },
               { icon: Trophy, value: "4.8/5", label: "Average Rating" },
-              { icon: Zap, value: "5,000+", label: "Gigs Completed" },
+              { icon: Zap, value: "500+", label: "Gigs Completed" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
