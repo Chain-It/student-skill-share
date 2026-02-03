@@ -149,14 +149,6 @@ export default function Signup() {
               ))}
             </div>
 
-            {/* Mini testimonial */}
-            <div className="bg-card p-6 rounded-xl border border-border">
-              <p className="italic text-muted-foreground">
-                "Signed up during mid-semester break — got my first gig within a week and earned ₦45k!"
-              </p>
-              <p className="font-semibold mt-3">— Aisha, Graphic Design Student</p>
-            </div>
-
             <p className="text-sm text-muted-foreground">
               Trusted by students from universities across Nigeria.
             </p>
