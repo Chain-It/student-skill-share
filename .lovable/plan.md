@@ -1,52 +1,49 @@
 
 
-# Fix: Portfolio Dialog Cut Off / Positioned to the Side
+# Fix: Textarea Placeholder Text Truncation in Portfolio Dialog
 
-## Problem Confirmed
+## Problem
 
-The "Add Portfolio Item" dialog is being rendered off to the right side of the viewport on both desktop and mobile. Looking at the current `dialog.tsx` file, the width constraint fix was NOT applied - it still shows `w-full max-w-lg` without the viewport margin constraint.
+In the "Add Portfolio Item" dialog, the description textarea placeholder text "Brief description of the work..." is being truncated with an ellipsis ("Brief description of the v...") on mobile and narrow desktop views.
 
 ## Root Cause
 
-The `DialogContent` component uses:
-```tsx
-"fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]..."
-```
+The default browser behavior for `<textarea>` placeholder text is to display it on a single line. When the textarea width is constrained (due to the modal width on smaller screens), the placeholder text gets truncated with an ellipsis instead of wrapping to multiple lines.
 
-With `w-full`, on smaller viewports or certain scroll states, the dialog can extend past the viewport edge because there's no explicit margin to keep it bounded.
+This is a CSS limitation - textarea placeholders don't naturally wrap like regular text content does.
 
 ## Solution
 
-Update the width class from `w-full` to `w-[calc(100%-2rem)]` which:
-- Subtracts 32px (16px on each side) from the full width
-- Ensures the dialog never touches the viewport edges
-- Still respects `max-w-lg` (512px) on larger screens
+There are two approaches to fix this:
 
-## File to Change
+### Option A: Shorten the Placeholder Text (Recommended)
+Change the placeholder to a shorter, more concise message that fits on narrow screens:
+- **Current**: "Brief description of the work..."
+- **Updated**: "Describe your work..."
 
-**`src/components/ui/dialog.tsx` - Line 39**
+This is cleaner and provides the same guidance without truncation issues.
 
-### Current Code:
-```tsx
-"fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg..."
-```
+### Option B: CSS Fix for Placeholder Wrapping
+Add `whitespace-pre-wrap` and `word-break` CSS properties to allow placeholder text to wrap. However, browser support for placeholder text wrapping is inconsistent.
 
-### Updated Code:
-```tsx
-"fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg..."
-```
+## Recommended Change
 
-## Technical Details
+**File: `src/components/profile/PortfolioSection.tsx` - Line 136**
 
-| Property | Before | After |
-|----------|--------|-------|
-| Width | `w-full` (100% viewport) | `w-[calc(100%-2rem)]` (100% minus 32px) |
-| Max Width | `max-w-lg` (512px) | `max-w-lg` (512px) - unchanged |
-| Centering | `left-[50%] translate-x-[-50%]` | Same - unchanged |
+| Current | Updated |
+|---------|---------|
+| `placeholder="Brief description of the work..."` | `placeholder="Describe your work..."` |
+
+## Why This Works
+
+- "Describe your work..." is 18 characters vs 31 characters
+- Fits comfortably within the narrowest mobile modal width
+- Maintains clear guidance for the user
+- No CSS hacks or browser compatibility concerns
 
 ## Impact
 
-- All dialogs in the application will now have proper margins on mobile and desktop
-- The dialog will always stay within the visible viewport
-- No functional changes - purely a visual positioning fix
+- Portfolio modal description field will display the full placeholder text on all screen sizes
+- No functional changes - purely a UX improvement
+- Single line change in one file
 
