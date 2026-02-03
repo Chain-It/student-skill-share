@@ -210,12 +210,12 @@ export default function Profile() {
 
                     {/* Username */}
                     <div className="space-y-2">
-                      <Label htmlFor="username">Display Name *</Label>
+                      <Label htmlFor="username">Username *</Label>
                       <Input
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Your display name"
+                        placeholder="Umary15"
                         required
                       />
                     </div>
@@ -227,7 +227,7 @@ export default function Profile() {
                         id="title"
                         value={professionalTitle}
                         onChange={(e) => setProfessionalTitle(e.target.value)}
-                        placeholder="e.g., UI/UX Designer | Figma, Web & Mobile"
+                        placeholder="e.g., Graphics Designer | Web Developer"
                         maxLength={80}
                       />
                       <p className="text-xs text-muted-foreground">
@@ -242,7 +242,7 @@ export default function Profile() {
                         id="location"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
-                        placeholder="e.g., Lagos, Nigeria"
+                        placeholder="e.g., Gombe, Nigeria"
                       />
                     </div>
 
@@ -280,11 +280,11 @@ export default function Profile() {
                   {/* Skills Tab */}
                   <TabsContent value="skills" className="space-y-6">
                     <SkillsInput
-                      label="Skills (up to 10)"
+                      label="Skills (up to 3)"
                       value={skills}
                       onChange={setSkills}
                       suggestions={SKILL_SUGGESTIONS}
-                      maxItems={10}
+                      maxItems={3}
                       placeholder="Add a skill..."
                     />
 
@@ -315,7 +315,7 @@ export default function Profile() {
                         <Input
                           value={educationInstitution}
                           onChange={(e) => setEducationInstitution(e.target.value)}
-                          placeholder="e.g., University of Lagos"
+                          placeholder="e.g., Gombe State University"
                         />
                       </div>
 
