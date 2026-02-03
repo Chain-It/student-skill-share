@@ -217,10 +217,10 @@ export default function Index() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Users, value: "1,000+", label: "Active Students" },
-              { icon: DollarSign, value: "₦10M+", label: "Earnings Paid Out" },
+              { icon: Users, value: "100+", label: "Active Students" },
+              { icon: DollarSign, value: "₦500k+", label: "Earnings Paid Out" },
               { icon: Trophy, value: "4.8/5", label: "Average Rating" },
-              { icon: Zap, value: "500+", label: "Gigs Completed" },
+              { icon: Zap, value: "100+", label: "Gigs Completed" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -317,7 +317,7 @@ export default function Index() {
               { icon: Shield, title: "Secure Campus Payments", desc: "Stripe-powered, fast withdrawals to your account." },
               { icon: Users, title: "Peer-to-Peer Trust", desc: "Verified students only — we speak the same language." },
               { icon: Sparkles, title: "Grow Your Portfolio Fast", desc: "Every gig adds professional work samples." },
-              { icon: DollarSign, title: "Earn While You Learn", desc: "Extra cash for fees, data, or fun — up to ₦200k+/month possible." },
+              { icon: DollarSign, title: "Earn While You Learn", desc: "Extra cash for fees, data, or fun — up to ₦50k+/month possible." },
             ].map((benefit, i) => (
               <motion.div
                 key={benefit.title}
