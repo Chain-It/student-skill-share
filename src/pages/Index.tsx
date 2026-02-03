@@ -262,12 +262,12 @@ export default function Index() {
                 name: "Aisha • Graphic Design, UNILAG",
               },
               {
-                quote: "Landed consistent tutoring clients for my course — paid my rent and gained teaching experience employers love.",
-                name: "Chidi • Computer Science, UI",
+                quote: "Landed consistent tutoring clients for Mathematics — paid my rent and gained teaching experience employers love.",
+                name: "Umar • Computer Science, GSU",
               },
               {
                 quote: "Quick video edits for campus events turned into steady side income. Payments are fast and secure!",
-                name: "Fatima • Media Student, OAU",
+                name: "Abdushshakur • Architecture, ATBU",
               },
             ].map((testimonial, i) => (
               <motion.div
