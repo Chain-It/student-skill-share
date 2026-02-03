@@ -50,7 +50,7 @@ export function Navbar() {
               to="/gigs"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              Browse Gigs
+              Explore Gigs
             </Link>
             
             {user ? (
