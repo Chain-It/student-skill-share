@@ -262,7 +262,7 @@ export default function Signup() {
                     <Label htmlFor="username">Username</Label>
                     <Input
                       id="username"
-                      placeholder="coolstudent"
+                      placeholder="umary"
                       {...register('username')}
                     />
                     {errors.username && (
@@ -275,7 +275,7 @@ export default function Signup() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder="umar@email.com"
                       {...register('email')}
                     />
                     {errors.email && (
