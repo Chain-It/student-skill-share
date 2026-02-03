@@ -140,13 +140,6 @@ export default function Login() {
               ))}
             </div>
 
-            {/* Mini testimonial for trust */}
-            <div className="bg-card p-6 rounded-xl border border-border">
-              <p className="italic text-muted-foreground">
-                "Logged in after classes and grabbed a quick tutoring gig — super convenient!"
-              </p>
-              <p className="font-semibold mt-3">— Fatima, Education Student</p>
-            </div>
 
             <p className="text-sm text-muted-foreground">
               Trusted by students from universities across Nigeria.
