@@ -133,7 +133,7 @@ export function PortfolioSection({ items, isEditable = false }: PortfolioSection
                     <Textarea
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Brief description of the work..."
+                      placeholder="Describe your work..."
                       rows={3}
                     />
                   </div>
