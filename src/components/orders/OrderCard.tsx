@@ -1,16 +1,24 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, CheckCircle, Star } from 'lucide-react';
+import { Clock, CheckCircle, Star, MessageCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { ORDER_STATUS_LABELS } from '@/lib/constants';
 import { RatingStars } from '@/components/gigs/RatingStars';
 import { useUpdateOrderStatus, type Order } from '@/hooks/useOrders';
 import { useCreateRating } from '@/hooks/useRatings';
 import { useAuth } from '@/hooks/useAuth';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { OrderChat } from '@/components/chat/OrderChat';
 
 interface OrderCardProps {
   order: Order;
@@ -135,7 +143,23 @@ export function OrderCard({ order, role }: OrderCardProps) {
               </p>
 
               {/* Actions */}
-              <div className="mt-3 flex gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
+                {/* Chat Button */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="sm" variant="outline">
+                      <MessageCircle className="w-4 h-4 mr-1" />
+                      Chat
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-lg p-0 gap-0">
+                    <DialogHeader className="sr-only">
+                      <DialogTitle>Order Chat</DialogTitle>
+                    </DialogHeader>
+                    <OrderChat orderId={order.id} className="border-0 shadow-none" />
+                  </DialogContent>
+                </Dialog>
+
                 {canMarkDelivered && (
                   <Button
                     size="sm"
